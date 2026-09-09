@@ -100,6 +100,12 @@ class HiverSupportAgent:
                 reasoning="Fallback keyword classifier"
             )
 
+    @property
+    def similarity_threshold(self) -> float:
+        if getattr(self.retriever.index_store, "is_tfidf", False):
+            return 0.10
+        return settings.SIMILARITY_THRESHOLD
+
     def process_conversation(
         self,
         customer_message: str,
@@ -115,6 +121,9 @@ class HiverSupportAgent:
         # Step 2: Retrieve historical cases
         raw_retrieved = self.retriever.retrieve(customer_message, top_k=settings.RETRIEVAL_TOP_K)
 
+        thresh = self.similarity_threshold
+        self.evidence_assessor = EvidenceAssessor(similarity_threshold=thresh)
+
         retrieved_refs = [
             RetrievedCaseRef(
                 case_id=r["case_id"],
@@ -123,13 +132,14 @@ class HiverSupportAgent:
                 intent=r["intent"],
                 customer_issue=r["customer_issue"],
                 historical_response=r["historical_response"],
-                selected_as_evidence=r["similarity_score"] >= settings.SIMILARITY_THRESHOLD
+                selected_as_evidence=r["similarity_score"] >= thresh
             )
             for r in raw_retrieved
         ]
 
         # Step 3: Assess evidence
         evidence_eval = self.evidence_assessor.assess_evidence(raw_retrieved, intent_pred.code)
+
 
         # Step 4: Determine escalation decision
         decision = self.escalation_engine.evaluate_escalation(
