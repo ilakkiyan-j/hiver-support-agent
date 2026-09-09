@@ -4,6 +4,13 @@ This document maps all **12 requirements** from the *Hiver SDE Intern Take-Home 
 
 ---
 
+### 🌐 Live Deployment & Interactive Web UI
+* 🔗 **Live Web Application**: [https://hiver-support-agent.onrender.com/](https://hiver-support-agent.onrender.com/)
+* ⚡ **Live API Health Check**: [https://hiver-support-agent.onrender.com/api/v1/health](https://hiver-support-agent.onrender.com/api/v1/health)
+
+---
+
+
 ## Deliverables Mapping Matrix
 
 | # | PDF / Assignment Requirement | Submission Document File | Summary of Detailed Implementation |

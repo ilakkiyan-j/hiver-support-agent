@@ -4,6 +4,13 @@
 
 ---
 
+### 🌐 Live Deployment & Interactive Web UI
+* 🔗 **Live Web Application**: [https://hiver-support-agent.onrender.com/](https://hiver-support-agent.onrender.com/)
+* ⚡ **Live API Health Check**: [https://hiver-support-agent.onrender.com/api/v1/health](https://hiver-support-agent.onrender.com/api/v1/health)
+
+---
+
+
 ## 1. Problem Framing
 
 Customer-support teams handle large volumes of informal, ambiguous, and multi-turn customer requests across social channels like Twitter. Standard LLM deployments often produce fluent but ungrounded or hallucinated answers, creating operational risk.
