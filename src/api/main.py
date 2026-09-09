@@ -64,6 +64,7 @@ class EvaluationRunRequest(BaseModel):
 
 # Endpoints
 @app.get("/api/v1/health")
+@app.get("/health")
 def health_check():
     return {
         "status": "healthy",
@@ -71,6 +72,7 @@ def health_check():
         "version": "1.0.0",
         "mode": settings.APP_MODE
     }
+
 
 @app.get("/api/v1/brands")
 def list_brands():
