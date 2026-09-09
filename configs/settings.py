@@ -28,8 +28,10 @@ class Settings(BaseSettings):
     INDEX_DIR: str = str(BASE_DIR / "data" / "indices")
     
     EMBEDDING_MODEL_NAME: str = "all-MiniLM-L6-v2"
+    USE_LIGHTWEIGHT_INDEX: bool = False
     RETRIEVAL_TOP_K: int = 5
     SIMILARITY_THRESHOLD: float = 0.55
     INTENT_CONFIDENCE_THRESHOLD: float = 0.65
+
 
 settings = Settings()

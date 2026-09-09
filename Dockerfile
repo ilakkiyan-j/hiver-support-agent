@@ -18,7 +18,9 @@ COPY . .
 EXPOSE 8000
 
 ENV APP_MODE=SAMPLE
+ENV USE_LIGHTWEIGHT_INDEX=true
 ENV PORT=8000
+
 
 # Start Uvicorn production server
 CMD ["sh", "-c", "uvicorn src.api.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
