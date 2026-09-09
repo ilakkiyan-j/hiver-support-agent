@@ -8,8 +8,9 @@ logger = logging.getLogger(__name__)
 HIGH_RISK_KEYWORDS = [
     "sue", "suing", "lawyer", "legal", "court", "attorney",
     "exploded", "fire", "smoke", "injury", "injured", "safety",
-    "fraud", "scam", "police", "stolen"
+    "fraud", "scam", "police", "stolen", "hacked", "unauthorized", "hack", "compromised"
 ]
+
 
 class EscalationEngine:
     """

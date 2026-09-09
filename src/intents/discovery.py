@@ -23,7 +23,10 @@ def map_text_to_intent_rulebased(text: str, taxonomy: IntentTaxonomy) -> str:
     """
     t_lower = text.lower()
 
-    if any(k in t_lower for k in ["battery", "drain", "charge", "power", "8%", "battery life"]):
+    if any(k in t_lower for k in ["store", "code", "billing", "unauthorized", "hacked", "charge of", "charged", "account", "apple id", "purchased", "refund", "itunes", "purchase", "subscription", "statement"]):
+        return "account_billing"
+
+    if any(k in t_lower for k in ["battery", "drain", "charging", "battery life", "power off", "battery level", "draining"]):
         return "battery_drain"
 
     if any(k in t_lower for k in ["update", "ios", "slow", "ios11", "version", "11.0.2"]):
@@ -31,9 +34,6 @@ def map_text_to_intent_rulebased(text: str, taxonomy: IntentTaxonomy) -> str:
 
     if any(k in t_lower for k in ["freeze", "crash", "stuck", "unresponsive", "keyboard"]):
         return "app_crash_freeze"
-
-    if any(k in t_lower for k in ["store", "code", "billing", "charge", "account", "apple id", "purchased", "refund", "itunes", "purchase"]):
-        return "account_billing"
 
     if any(k in t_lower for k in ["music", "apple music", "whatsapp", "playlist", "listen", "song"]):
         return "music_media_issue"
@@ -45,3 +45,4 @@ def map_text_to_intent_rulebased(text: str, taxonomy: IntentTaxonomy) -> str:
         return "hardware_repair"
 
     return "other_unknown"
+
