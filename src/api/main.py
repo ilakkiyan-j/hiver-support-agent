@@ -13,11 +13,24 @@ from src.evaluation.harness import EvaluationHarness
 from src.retrieval.index import FAISSIndexStore
 from src.retrieval.retriever import CaseRetriever
 
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Pre-warm agent & build index during server startup to prevent gateway timeouts
+    try:
+        get_agent()
+    except Exception as e:
+        print(f"Warning during agent pre-warm: {e}")
+    yield
+
 app = FastAPI(
     title="HiverSupport Agent API",
     version="1.0.0",
-    description="Evidence-Grounded Customer Support Agent API"
+    description="Evidence-Grounded Customer Support Agent API",
+    lifespan=lifespan
 )
+
 
 # In-memory storage for agent runs, evaluations, and experiments
 agent_runs_db: Dict[str, AgentResult] = {}
