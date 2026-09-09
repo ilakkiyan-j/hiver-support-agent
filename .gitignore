@@ -12,9 +12,10 @@ __pycache__/
 htmlcov/
 *.log
 
-# Vector index binary artifacts (regenerated on first run)
-data/indices/*.index
-data/indices/*.pkl
+# Vector index binary artifacts (committed for instant offline load)
+# data/indices/*.index
+# data/indices/*.pkl
+
 
 # Large raw datasets (Kaggle twcs.csv > 500MB)
 dataset/twcs/
