@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HiverSupport Agent — Evidence-Grounded AI Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-blue: #38bdf8;
+      --accent-purple: #818cf8;
+      --accent-green: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-red: #f87171;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+    body {
+      background: radial-gradient(circle at top left, #1e1b4b, #0f172a 60%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    textarea {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: var(--text-main);
+      padding: 1rem;
+      font-size: 1rem;
+      resize: vertical;
+      min-height: 100px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    textarea:focus {
+      border-color: var(--accent-blue);
+    }
+
+    .btn-submit {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #0284c7, #4f46e5);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.15s, opacity 0.2s;
+    }
+
+    .btn-submit:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .sample-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .chip:hover {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .results-grid { grid-template-columns: 1fr; }
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-auto { background: rgba(52, 211, 153, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
+    .badge-escalate { background: rgba(248, 113, 113, 0.15); color: var(--accent-red); border: 1px solid var(--accent-red); }
+
+    .evidence-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .evidence-table th, .evidence-table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .evidence-table th {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .score-pill {
+      font-weight: 700;
+      color: var(--accent-blue);
+    }
+
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>HiverSupport Agent</h1>
+      <p>Evidence-Grounded AI Support, Intent Classification & Escalation Engine</p>
+    </header>
+
+    <div class="card">
+      <form id="analyze-form" class="form-group">
+        <label for="customer-message">Customer Support Query:</label>
+        <textarea id="customer-message" placeholder="Type a customer query (e.g. My phone battery drops 10% every few minutes after the iOS update)..."></textarea>
+        
+        <div class="sample-buttons">
+          <span class="chip" onclick="fillSample('My battery life is terrible after updating to iOS 11.0.2!')">Battery Issue</span>
+          <span class="chip" onclick="fillSample('I was charged twice for my Apple Music subscription this month.')">Billing Dispute</span>
+          <span class="chip" onclick="fillSample('I want to sue your company! My phone caught fire and exploded!')">High Risk Escalation</span>
+          <span class="chip" onclick="fillSample('Can you help me with something?')">Ambiguous Query</span>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submit-btn">Analyze Request</button>
+      </form>
+    </div>
+
+    <div id="results-container" class="hidden">
+      <div class="results-grid">
+        <!-- Intent & Decision Card -->
+        <div class="card">
+          <h3 style="margin-bottom: 1rem;">1. Intent & Handling Decision</h3>
+          
+          <div style="margin-bottom: 1rem;">
+            <span style="color: var(--text-muted); font-size: 0.9rem;">Detected Intent:</span>
+            <div style="font-size: 1.2rem; font-weight: 700; color: var(--accent-blue);" id="res-intent-name">-</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);" id="res-intent-conf">Confidence: -</div>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <span style="color: var(--text-muted); font-size: 0.9rem;">Operational Decision:</span>
+            <div style="margin-top: 0.4rem;">
+              <span id="res-decision-badge" class="badge badge-auto">AUTO_HANDLE</span>
+            </div>
+            <p id="res-decision-reason" style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--accent-amber);"></p>
+          </div>
+        </div>
+
+        <!-- Evidence Assessment & Reply Card -->
+        <div class="card">
+          <h3 style="margin-bottom: 1rem;">2. Evidence & Grounded Draft Reply</h3>
+          
+          <div style="margin-bottom: 1rem;">
+            <span style="color: var(--text-muted); font-size: 0.9rem;">Evidence Sufficiency:</span>
+            <div id="res-evidence-status" style="font-weight: 600; font-size: 1rem;">-</div>
+          </div>
+
+          <div style="margin-top: 1rem;">
+            <span style="color: var(--text-muted); font-size: 0.9rem;">Draft Grounded Reply:</span>
+            <div id="res-draft-reply" style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-color); padding: 1rem; border-radius: 10px; margin-top: 0.4rem; font-size: 0.95rem; line-height: 1.5;">
+              -
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Retrieved Historical Cases Table -->
+      <div class="card">
+        <h3>3. Retrieved Historical Support Cases (Evidence Trace)</h3>
+        <table class="evidence-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Similarity</th>
+              <th>Historical Customer Issue</th>
+              <th>Historical Brand Resolution</th>
+            </tr>
+          </thead>
+          <tbody id="evidence-table-body">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function fillSample(text) {
+      document.getElementById('customer-message').value = text;
+    }
+
+    document.getElementById('analyze-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = document.getElementById('customer-message').value.trim();
+      if (!msg) return;
+
+      const btn = document.getElementById('submit-btn');
+      btn.innerText = 'Analyzing...';
+      btn.disabled = true;
+
+      try {
+        const response = await fetch('/api/v1/conversations/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            brand_id: 'AppleSupport',
+            customer_message: msg
+          })
+        });
+
+        const data = await response.json();
+
+        // Render Intent
+        document.getElementById('res-intent-name').innerText = `${data.intent.name} (${data.intent.code})`;
+        document.getElementById('res-intent-conf').innerText = `Confidence: ${(data.intent.confidence * 100).toFixed(1)}%`;
+
+        // Render Decision
+        const badge = document.getElementById('res-decision-badge');
+        badge.innerText = data.decision.type;
+        badge.className = data.decision.type === 'AUTO_HANDLE' ? 'badge badge-auto' : 'badge badge-escalate';
+
+        const reasonElem = document.getElementById('res-decision-reason');
+        reasonElem.innerText = data.decision.reason ? `Reason: ${data.decision.reason}` : '';
+
+        // Render Evidence
+        const evStatus = document.getElementById('res-evidence-status');
+        evStatus.innerText = data.evidence.sufficient 
+          ? `Sufficient Evidence (${data.evidence.supporting_case_count} supporting cases)` 
+          : `Insufficient Evidence (${data.evidence.limitation_reason || 'Low similarity score'})`;
+        evStatus.style.color = data.evidence.sufficient ? 'var(--accent-green)' : 'var(--accent-amber)';
+
+        // Render Draft Reply
+        document.getElementById('res-draft-reply').innerText = data.draft_reply || '(Escalated to human agent — No automated reply drafted)';
+
+        // Render Cases Table
+        const tbody = document.getElementById('evidence-table-body');
+        tbody.innerHTML = '';
+        if (data.retrieved_cases && data.retrieved_cases.length > 0) {
+          data.retrieved_cases.forEach(c => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>#${c.rank}</td>
+              <td class="score-pill">${(c.similarity_score * 100).toFixed(1)}%</td>
+              <td>${c.customer_issue}</td>
+              <td>${c.historical_response}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+        } else {
+          tbody.innerHTML = '<tr><td colspan="4">No historical evidence cases retrieved.</td></tr>';
+        }
+
+        document.getElementById('results-container').classList.remove('hidden');
+
+      } catch (err) {
+        alert('Error analyzing conversation: ' + err.message);
+      } finally {
+        btn.innerText = 'Analyze Request';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

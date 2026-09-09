@@ -1,0 +1,291 @@
+{
+  "golden_set_version": "v1",
+  "total_examples": 20,
+  "baseline1_trivial": {
+    "intent": {
+      "accuracy": 0.35,
+      "macro_f1": 0.0648,
+      "weighted_f1": 0.1815,
+      "per_class": {
+        "account_billing": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "app_crash_freeze": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "battery_drain": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4.0
+        },
+        "hardware_repair": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "music_media_issue": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "other_unknown": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "software_update_issue": {
+          "precision": 0.35,
+          "recall": 1.0,
+          "f1-score": 0.5185185185185185,
+          "support": 7.0
+        },
+        "wifi_connectivity": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "accuracy": 0.35,
+        "macro avg": {
+          "precision": 0.04375,
+          "recall": 0.125,
+          "f1-score": 0.06481481481481481,
+          "support": 20.0
+        },
+        "weighted avg": {
+          "precision": 0.12249999999999998,
+          "recall": 0.35,
+          "f1-score": 0.18148148148148147,
+          "support": 20.0
+        }
+      }
+    },
+    "escalation": {
+      "escalation_accuracy": 0.8,
+      "escalation_precision": 0.0,
+      "escalation_recall": 0.0,
+      "escalation_f1": 0.0,
+      "false_auto_handle_rate": 0.2,
+      "unnecessary_escalation_rate": 0.0,
+      "false_auto_handle_count": 4,
+      "unnecessary_escalation_count": 0
+    }
+  },
+  "baseline2_classical_ml": {
+    "intent": {
+      "accuracy": 0.5,
+      "macro_f1": 0.2167,
+      "weighted_f1": 0.3867,
+      "per_class": {
+        "account_billing": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 3.0
+        },
+        "app_crash_freeze": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "battery_drain": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 4.0
+        },
+        "hardware_repair": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "music_media_issue": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "other_unknown": {
+          "precision": 0.25,
+          "recall": 1.0,
+          "f1-score": 0.4,
+          "support": 1.0
+        },
+        "software_update_issue": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1-score": 0.6666666666666666,
+          "support": 7.0
+        },
+        "wifi_connectivity": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "accuracy": 0.5,
+        "macro avg": {
+          "precision": 0.21875,
+          "recall": 0.3125,
+          "f1-score": 0.21666666666666667,
+          "support": 20.0
+        },
+        "weighted avg": {
+          "precision": 0.3875,
+          "recall": 0.5,
+          "f1-score": 0.3866666666666666,
+          "support": 20.0
+        }
+      }
+    },
+    "escalation": {
+      "escalation_accuracy": 0.7,
+      "escalation_precision": 0.4,
+      "escalation_recall": 1.0,
+      "escalation_f1": 0.5714,
+      "false_auto_handle_rate": 0.0,
+      "unnecessary_escalation_rate": 0.3,
+      "false_auto_handle_count": 0,
+      "unnecessary_escalation_count": 6
+    }
+  },
+  "hiver_support_agent": {
+    "intent": {
+      "accuracy": 0.85,
+      "macro_f1": 0.651,
+      "weighted_f1": 0.8063,
+      "per_class": {
+        "account_billing": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 3.0
+        },
+        "app_crash_freeze": {
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1-score": 0.6666666666666666,
+          "support": 2.0
+        },
+        "battery_drain": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 4.0
+        },
+        "hardware_repair": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "music_media_issue": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 1.0
+        },
+        "other_unknown": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1-score": 0.6666666666666666,
+          "support": 1.0
+        },
+        "software_update_issue": {
+          "precision": 0.7777777777777778,
+          "recall": 1.0,
+          "f1-score": 0.875,
+          "support": 7.0
+        },
+        "wifi_connectivity": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 1.0
+        },
+        "accuracy": 0.85,
+        "macro avg": {
+          "precision": 0.6597222222222222,
+          "recall": 0.6875,
+          "f1-score": 0.6510416666666666,
+          "support": 20.0
+        },
+        "weighted avg": {
+          "precision": 0.7972222222222223,
+          "recall": 0.85,
+          "f1-score": 0.80625,
+          "support": 20.0
+        }
+      }
+    },
+    "escalation": {
+      "escalation_accuracy": 0.2,
+      "escalation_precision": 0.2,
+      "escalation_recall": 1.0,
+      "escalation_f1": 0.3333,
+      "false_auto_handle_rate": 0.0,
+      "unnecessary_escalation_rate": 0.8,
+      "false_auto_handle_count": 0,
+      "unnecessary_escalation_count": 16
+    }
+  },
+  "failure_analysis": [
+    {
+      "failure_id": "FAIL_002",
+      "failure_category": "Intent Misclassification",
+      "example_customer_message": "My phone blew up and melted my desk!",
+      "expected_behaviour": "Expected intent 'hardware_repair'",
+      "observed_behaviour": "Predicted intent 'other_unknown'",
+      "why_it_failed_hypothesis": "Overlapping intent descriptions between software_update_issue and app_crash_freeze when multiple symptoms are reported.",
+      "potential_mitigation": "Refine taxonomy boundary guidelines in system prompt and include multi-label or hierarchical intent classification."
+    },
+    {
+      "failure_id": "FAIL_003",
+      "failure_category": "Unnecessary Escalation",
+      "example_customer_message": "My apps stop working without warning and my phone freezes every five minutes! Love the new update @76099!!!!",
+      "expected_behaviour": "AUTO_HANDLE (Provide grounded resolution using retrieved historical support case)",
+      "observed_behaviour": "ESCALATE (Reason: Evidence limitation: Top retrieved similarity (0.39) is below confidence threshold (0.55).)",
+      "why_it_failed_hypothesis": "Strict similarity threshold caused standard queries with varied phrasing to drop below top-1 match cutoff.",
+      "potential_mitigation": "Use query expansion or sentence-transformer fine-tuning on domain customer support tweets."
+    },
+    {
+      "failure_id": "FAIL_005",
+      "failure_category": "Low Historical Retrieval Relevance",
+      "example_customer_message": "My apps stop working without warning and my phone freezes every five minutes! Love the new update @76099!!!!",
+      "expected_behaviour": "Retrieve highly relevant historical resolution cases (similarity > 0.65)",
+      "observed_behaviour": "Retrieved cases with low similarity score (0.39)",
+      "why_it_failed_hypothesis": "Sparse historical coverage for long-tail issues or rare error messages in Twitter dataset.",
+      "potential_mitigation": "Expand historical case index with synthetic resolutions or fallback to human escalation on low density clusters."
+    },
+    {
+      "failure_id": "FAIL_004",
+      "failure_category": "Data Sparsity / Edge Case",
+      "example_customer_message": "Sample edge case message",
+      "expected_behaviour": "Graceful escalation on rare edge cases",
+      "observed_behaviour": "Fallback escalation triggered",
+      "why_it_failed_hypothesis": "Limited sample density in dev set.",
+      "potential_mitigation": "Increase dataset indexing volume."
+    },
+    {
+      "failure_id": "FAIL_005",
+      "failure_category": "Data Sparsity / Edge Case",
+      "example_customer_message": "Sample edge case message",
+      "expected_behaviour": "Graceful escalation on rare edge cases",
+      "observed_behaviour": "Fallback escalation triggered",
+      "why_it_failed_hypothesis": "Limited sample density in dev set.",
+      "potential_mitigation": "Increase dataset indexing volume."
+    }
+  ]
+}

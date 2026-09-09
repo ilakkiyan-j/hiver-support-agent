@@ -1,0 +1,29 @@
+# Environment & Secret files
+.env
+*.env
+!.env.example
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Vector index binary artifacts (regenerated on first run)
+data/indices/*.index
+data/indices/*.pkl
+
+# Large raw datasets (Kaggle twcs.csv > 500MB)
+dataset/twcs/
+*.csv
+!dataset/sample.csv
+
+# OS & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+

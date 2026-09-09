@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  hiver-agent:
+    build: .
+    container_name: hiver_support_agent
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - LLM_PROVIDER=google
+      - LLM_MODEL=gemini-2.5-flash
+      - APP_MODE=SAMPLE
+    restart: unless-stopped
